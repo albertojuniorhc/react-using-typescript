@@ -13,10 +13,10 @@ export default function Item({
   id,
   selectTask,
 }: Props) {
-  console.log("Item atual: ", { task, time, selected, finished, id });
+  console.log("Current item: ", { task, time, selected, finished, id });
   return (
     <li
-      className={style.item}
+      className={`${style.item} ${selected ? style.itemSelected : ''}`}
       onClick={() =>
         selectTask({
           task,
