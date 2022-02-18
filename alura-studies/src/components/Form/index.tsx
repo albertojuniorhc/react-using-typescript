@@ -1,16 +1,19 @@
 import React from "react";
+import { ITask } from "../../types/task";
 import Button from "../Button";
 import style from "./Form.module.scss";
 
-class Form extends React.Component {
+class Form extends React.Component<{
+  setTasks: React.Dispatch<React.SetStateAction<ITask[]>>;
+}> {
   state = {
     task: "",
-    time: "00:00:00"
-  }
+    time: "00:00:00",
+  };
 
-  addTask(event: React.FormEvent<HTMLFormElement>){
+  addTask(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    console.log('state: ', this.state )
+    this.props.setTasks((oldTasks) => [...oldTasks, { ...this.state }]);
   }
 
   render() {
@@ -24,7 +27,9 @@ class Form extends React.Component {
             id="task"
             placeholder="What do you wanna study?"
             value={this.state.task}
-            onChange={event => this.setState({ ...this.setState, task: event.target.value })}
+            onChange={(event) =>
+              this.setState({ ...this.setState, task: event.target.value })
+            }
             required
           />
         </div>
@@ -38,11 +43,13 @@ class Form extends React.Component {
             min="00:00:00"
             max="01:30:00"
             value={this.state.time}
-            onChange={event => this.setState({ ...this.setState, time: event.target.value })}
+            onChange={(event) =>
+              this.setState({ ...this.setState, time: event.target.value })
+            }
             required
           />
         </div>
-        <Button> Add </Button>
+        <Button type="submit"> Add </Button>
       </form>
     );
   }
