@@ -18,13 +18,22 @@ export default function Stopwatch({ selected }: Props) {
     }
   }, [selected]);
 
+  function regressive(counter: number = 0) {
+    setTimeout(() => {
+      if (counter > 0) {
+        setTime(counter - 1);
+        return regressive(counter - 1);
+      }
+    }, 1 * 1000);
+  }
+
   return (
     <div className={style.stopwatch}>
       <p className={style.title}>Select a card and start the Stopwatch</p>
       <div className={style.clockWrapper}>
-        <Clock time={time}/>
+        <Clock time={time} />
       </div>
-      <Button>Start</Button>
+      <Button onClick={() => regressive(time)}>Start</Button>
     </div>
   );
 }
