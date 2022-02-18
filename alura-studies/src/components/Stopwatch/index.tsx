@@ -21,9 +21,8 @@ export default function Stopwatch({ selected }: Props) {
   return (
     <div className={style.stopwatch}>
       <p className={style.title}>Select a card and start the Stopwatch</p>
-      Time: {time}
       <div className={style.clockWrapper}>
-        <Clock />
+        <Clock time={time}/>
       </div>
       <Button>Start</Button>
     </div>
